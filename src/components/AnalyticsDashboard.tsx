@@ -90,7 +90,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
                 barSize={15}
               >
                 <RadialBar
-                  minAngle={15}
+                  // Removed minAngle property
                   background
                   clockWise
                   dataKey="value"

@@ -98,7 +98,8 @@ export const starAnimation: Variants = {
       ease: "easeInOut",
       repeat: Infinity,
       repeatType: "loop",
-      delay: (custom) => custom * 0.5
+      // Fix: Change the function to a fixed number or remove the delay property
+      delay: 0.5
     }
   }
 };
