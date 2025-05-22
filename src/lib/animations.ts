@@ -61,3 +61,26 @@ export const scaleIn: Variants = {
     },
   },
 };
+
+export const floatingAnimation: Variants = {
+  animate: {
+    y: [0, -10, 0],
+    transition: {
+      duration: 3,
+      ease: "easeInOut",
+      repeat: Infinity,
+    }
+  }
+};
+
+export const pulseAnimation: Variants = {
+  animate: {
+    scale: [1, 1.02, 1],
+    opacity: [1, 0.9, 1],
+    transition: {
+      duration: 2,
+      ease: "easeInOut",
+      repeat: Infinity,
+    }
+  }
+};

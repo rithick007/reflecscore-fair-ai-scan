@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import NetworkBackground from '@/components/NetworkBackground';
+import MovingResumes from '@/components/MovingResumes';
 import Logo from '@/components/Logo';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
       variants={pageTransition}
     >
       <NetworkBackground />
+      <MovingResumes />
       
       <main className="flex-1 flex items-center justify-center">
         <motion.div 
@@ -47,7 +49,7 @@ const Home: React.FC = () => {
               className="text-gray-600 max-w-md mb-8"
               variants={fadeInUp}
             >
-              Analyze resumes with fairness and clarity using our advanced AI-powered screening technology.
+              Harness the power of next-generation AI to analyze resumes with unprecedented fairness and clarity.
             </motion.p>
             
             <motion.div variants={fadeInUp}>
@@ -92,8 +94,8 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Fast Analysis</h3>
-                <p className="text-sm text-gray-600">Real-time resume evaluation in seconds</p>
+                <h3 className="text-lg font-semibold mb-2">Lightning Analysis</h3>
+                <p className="text-sm text-gray-600">Quantum-grade processing in milliseconds</p>
               </div>
               
               <div className="text-center p-4">
@@ -111,8 +113,8 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Bias Mitigation</h3>
-                <p className="text-sm text-gray-600">Fair evaluation technology</p>
+                <h3 className="text-lg font-semibold mb-2">Neural Fairness</h3>
+                <p className="text-sm text-gray-600">Advanced AI bias mitigation algorithms</p>
               </div>
               
               <div className="text-center p-4">
@@ -130,8 +132,8 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Clear Insights</h3>
-                <p className="text-sm text-gray-600">Detailed reports and analytics</p>
+                <h3 className="text-lg font-semibold mb-2">Precision Insights</h3>
+                <p className="text-sm text-gray-600">Crystalline data visualization and metrics</p>
               </div>
             </div>
           </motion.div>
