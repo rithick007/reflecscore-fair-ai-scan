@@ -1,181 +1,137 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  AreaChart, 
-  Area, 
-  PieChart, 
-  Pie, 
-  Cell, 
-  RadialBarChart, 
-  RadialBar, 
+import {
   ResponsiveContainer,
-  Tooltip,
-  Legend
+  RadialBarChart,
+  RadialBar,
+  Legend,
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip
 } from 'recharts';
 import { Button } from '@/components/ui/button';
-import { fadeInUp } from '@/lib/animations';
-import { ChartContainer, ChartTooltipContent, ChartTooltip } from '@/components/ui/chart';
+import { fadeInUp, scaleIn } from '@/lib/animations';
 
-interface AnalyticsDashboardProps {
-  skillsMatch: number;
-  experience: number;
-  education: number;
-  keywords: number;
-  hasBias: boolean;
-  biasFactors?: {
-    name: string;
-    value: number;
-    color: string;
-  }[];
-}
-
-const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
-  skillsMatch,
-  experience,
-  education,
-  keywords,
-  hasBias,
-  biasFactors = []
-}) => {
-  // Skills data for radial bar chart
+const AnalyticsDashboard: React.FC = () => {
+  // Dummy data for the charts
   const skillsData = [
-    { name: 'Skills Match', value: skillsMatch, fill: '#3B82F6' },
-    { name: 'Experience', value: experience, fill: '#06B6D4' },
-    { name: 'Education', value: education, fill: '#8B5CF6' },
-    { name: 'Keywords', value: keywords, fill: '#10B981' }
+    { name: 'Skills Match', value: 78, fill: '#3B82F6' },
+    { name: 'Experience', value: 65, fill: '#8B5CF6' },
+    { name: 'Education', value: 82, fill: '#06B6D4' },
+    { name: 'Keywords', value: 71, fill: '#10B981' },
   ];
-
-  // Default bias factors if none provided
-  const defaultBiasFactors = [
-    { name: 'Gender Neutral', value: 85, color: '#10B981' },
-    { name: 'Regional', value: 10, color: '#F97316' },
-    { name: 'Age Neutral', value: 95, color: '#3B82F6' },
-    { name: 'Cultural', value: 5, color: '#F43F5E' }
-  ];
-
-  const biasData = hasBias ? (biasFactors.length ? biasFactors : defaultBiasFactors) : [];
   
-  const chartConfig = {
-    skills: { theme: { light: '#3B82F6', dark: '#2563EB' } },
-    experience: { theme: { light: '#06B6D4', dark: '#0891B2' } },
-    education: { theme: { light: '#8B5CF6', dark: '#7C3AED' } },
-    keywords: { theme: { light: '#10B981', dark: '#059669' } },
-    bias1: { theme: { light: '#10B981', dark: '#059669' } },
-    bias2: { theme: { light: '#F97316', dark: '#EA580C' } },
-    bias3: { theme: { light: '#3B82F6', dark: '#2563EB' } },
-    bias4: { theme: { light: '#F43F5E', dark: '#E11D48' } },
-  };
+  const biasFactors = [
+    { name: 'Gender Neutral', value: 95, color: '#10B981' },
+    { name: 'Age Neutral', value: 90, color: '#3B82F6' },
+    { name: 'Regional Neutral', value: 85, color: '#8B5CF6' },
+    { name: 'Name Neutral', value: 92, color: '#06B6D4' },
+  ];
+  
+  const COLORS = ['#10B981', '#3B82F6', '#8B5CF6', '#06B6D4'];
+  
+  const CustomLegend = () => (
+    <ul className="flex flex-wrap gap-4 justify-center text-xs mt-4">
+      {skillsData.map((entry, index) => (
+        <li key={`legend-${index}`} className="flex items-center">
+          <div 
+            className="w-3 h-3 rounded-full mr-1" 
+            style={{ backgroundColor: entry.fill }}
+          />
+          <span>{entry.name}: {entry.value}%</span>
+        </li>
+      ))}
+    </ul>
+  );
+  
+  const BiasLegend = () => (
+    <ul className="flex flex-wrap gap-4 justify-center text-xs mt-4">
+      {biasFactors.map((entry, index) => (
+        <li key={`bias-legend-${index}`} className="flex items-center">
+          <div 
+            className="w-3 h-3 rounded-full mr-1" 
+            style={{ backgroundColor: entry.color }}
+          />
+          <span>{entry.name}: {entry.value}%</span>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
-    <motion.div
-      className="glass-card p-6 w-full max-w-3xl mx-auto mt-8"
-      variants={fadeInUp}
-      initial="initial"
-      animate="animate"
-    >
-      <h3 className="text-xl font-semibold mb-6 text-center font-tech">Fit Analysis</h3>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-3">
-          <h4 className="text-lg font-medium text-center font-tech">Skills & Qualifications</h4>
-          <div className="h-[300px]">
-            <ChartContainer config={chartConfig}>
-              <RadialBarChart
-                innerRadius="20%"
-                outerRadius="90%"
-                data={skillsData}
-                startAngle={180}
-                endAngle={0}
-                barSize={15}
-              >
-                <RadialBar
-                  // Removed minAngle property
-                  background
-                  clockWise
-                  dataKey="value"
-                  cornerRadius={10}
-                />
-                <ChartTooltip 
-                  content={<ChartTooltipContent />}
-                />
-              </RadialBarChart>
-            </ChartContainer>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            {skillsData.map((entry, index) => (
-              <div key={`skill-${index}`} className="flex items-center space-x-2">
-                <div 
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: entry.fill }}
-                />
-                <span className="text-xs font-tech">{entry.name}: {entry.value}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
+    <div className="w-full max-w-4xl mx-auto">
+      <motion.div 
+        className="glass-card p-6 mb-8"
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+      >
+        <h2 className="text-xl md:text-2xl font-bold mb-6 font-orbitron text-center">Fit Analysis</h2>
         
-        {hasBias && (
-          <div className="space-y-3">
-            <h4 className="text-lg font-medium text-center font-tech">Bias Factors Detected</h4>
-            <div className="h-[300px]">
-              <ChartContainer config={chartConfig}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.div variants={scaleIn}>
+            <h3 className="font-orbitron font-semibold mb-4 text-center">Skills & Experience</h3>
+            <div className="h-64 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadialBarChart 
+                  cx="50%" 
+                  cy="50%" 
+                  innerRadius="10%" 
+                  outerRadius="80%" 
+                  data={skillsData} 
+                  startAngle={180} 
+                  endAngle={0}
+                  barSize={15}
+                >
+                  <RadialBar
+                    background
+                    dataKey="value"
+                    cornerRadius={10}
+                  />
+                  <Tooltip />
+                </RadialBarChart>
+              </ResponsiveContainer>
+              <CustomLegend />
+            </div>
+          </motion.div>
+          
+          <motion.div variants={scaleIn}>
+            <h3 className="font-orbitron font-semibold mb-4 text-center">Fairness Analysis</h3>
+            <div className="h-64 w-full">
+              <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
-                    data={biasData}
+                    data={biasFactors}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    outerRadius={100}
+                    outerRadius={80}
                     fill="#8884d8"
                     dataKey="value"
                   >
-                    {biasData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    {biasFactors.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <ChartTooltip 
-                    content={<ChartTooltipContent />}
-                  />
+                  <Tooltip />
                 </PieChart>
-              </ChartContainer>
+              </ResponsiveContainer>
+              <BiasLegend />
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {biasData.map((entry, index) => (
-                <div key={`bias-${index}`} className="flex items-center space-x-2">
-                  <div 
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: entry.color }}
-                  />
-                  <span className="text-xs font-tech">{entry.name}: {entry.value}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-      
-      <div className="mt-8 text-center">
-        <Button 
-          className="primary-gradient hover:opacity-90 transition-opacity"
-          onClick={() => alert('Detailed report feature coming soon!')}
-        >
-          View Detailed Report
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 ml-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+          </motion.div>
+        </div>
+        
+        <div className="mt-6 text-center">
+          <Button 
+            className="bg-gradient-to-r from-deepViolet to-teal hover:opacity-90 transition-opacity"
           >
-            <path
-              fillRule="evenodd"
-              d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </Button>
-      </div>
-    </motion.div>
+            View Detailed Report
+          </Button>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

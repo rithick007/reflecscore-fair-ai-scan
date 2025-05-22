@@ -3,7 +3,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import NetworkBackground from '@/components/NetworkBackground';
-import MovingResumes from '@/components/MovingResumes';
 import Logo from '@/components/Logo';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -18,14 +17,14 @@ const Home: React.FC = () => {
   
   return (
     <motion.div 
-      className="min-h-screen flex flex-col"
+      className="min-h-screen flex flex-col relative"
       initial="initial"
       animate="animate"
       exit="exit"
       variants={pageTransition}
     >
-      <NetworkBackground />
-      <MovingResumes />
+      {/* Clean gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B] via-[#FBBF24] to-[#F59E0B] -z-10"></div>
       
       <main className="flex-1 flex items-center justify-center">
         <motion.div 
@@ -36,28 +35,38 @@ const Home: React.FC = () => {
             className="flex flex-col items-center text-center mb-12"
             variants={fadeInUp}
           >
-            <Logo size="lg" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <Logo size="lg" className="mb-8" />
+            </motion.div>
             
             <motion.h2 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold mt-6 mb-4 font-orbitron uppercase tracking-widest"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 font-orbitron uppercase tracking-widest text-[#1E1B4B] drop-shadow-sm"
               variants={fadeInUp}
             >
-              One Resume. One Score. Zero Bias.
+              ReflecScore
             </motion.h2>
             
             <motion.p 
-              className="text-gray-600 max-w-md mb-8 font-exo tracking-wide"
+              className="text-xl md:text-2xl text-[#374151] max-w-md mb-10 font-exo tracking-wide drop-shadow-sm"
               variants={fadeInUp}
             >
-              Harness quantum-grade neural networks to process resumes with unprecedented fairness and precision. Our advanced AI eliminates human bias through multi-layered algorithmic screening.
+              AI. Fairness. One Resume at a Time.
             </motion.p>
             
-            <motion.div variants={fadeInUp}>
+            <motion.div 
+              variants={fadeInUp}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
               <Button 
-                className="primary-gradient text-lg py-6 px-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow hover:opacity-90 font-orbitron tracking-wider"
+                className="bg-gradient-to-r from-deepViolet to-teal text-white text-lg py-6 px-10 rounded-xl shadow-lg hover:shadow-glow transition-all duration-300 font-orbitron tracking-wider"
                 onClick={handleGetStarted}
               >
-                GET STARTED
+                START EVALUATION
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className="h-5 w-5 ml-2" 
@@ -74,16 +83,17 @@ const Home: React.FC = () => {
             </motion.div>
           </motion.div>
           
+          {/* Glass card with features using blur */}
           <motion.div 
-            className="glass-card p-8 mx-auto max-w-2xl"
+            className="backdrop-blur-sm bg-white/30 p-8 rounded-2xl mx-auto max-w-2xl shadow-lg border border-white/20"
             variants={fadeInUp}
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4">
-                <div className="bg-electricBlue/10 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <div className="bg-deepViolet/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-electricBlue"
+                    className="h-8 w-8 text-deepViolet"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -94,12 +104,12 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2 font-orbitron">QUANTUM ANALYSIS</h3>
-                <p className="text-sm text-gray-600 font-exo">Neural-assisted processing in milliseconds with advanced pattern recognition</p>
+                <h3 className="text-lg font-semibold mb-2 font-orbitron text-[#1E1B4B]">QUANTUM ANALYSIS</h3>
+                <p className="text-sm text-[#374151] font-exo">Neural-assisted processing in milliseconds with advanced pattern recognition</p>
               </div>
               
               <div className="text-center p-4">
-                <div className="bg-teal/10 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <div className="bg-teal/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-8 w-8 text-teal"
@@ -113,15 +123,15 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2 font-orbitron">NEURAL FAIRNESS</h3>
-                <p className="text-sm text-gray-600 font-exo">Multi-layered AI bias mitigation with cognitive algorithmic balancing</p>
+                <h3 className="text-lg font-semibold mb-2 font-orbitron text-[#1E1B4B]">NEURAL FAIRNESS</h3>
+                <p className="text-sm text-[#374151] font-exo">Multi-layered AI bias mitigation with cognitive algorithmic balancing</p>
               </div>
               
               <div className="text-center p-4">
-                <div className="bg-deepViolet/10 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <div className="bg-electricBlue/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-deepViolet"
+                    className="h-8 w-8 text-electricBlue"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -132,13 +142,26 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2 font-orbitron">DATA PRECISION</h3>
-                <p className="text-sm text-gray-600 font-exo">High-definition visualization metrics with hyper-granular qualification mapping</p>
+                <h3 className="text-lg font-semibold mb-2 font-orbitron text-[#1E1B4B]">DATA PRECISION</h3>
+                <p className="text-sm text-[#374151] font-exo">High-definition visualization metrics with hyper-granular qualification mapping</p>
               </div>
             </div>
           </motion.div>
         </motion.div>
       </main>
+      
+      {/* SVG wave divider */}
+      <div className="w-full overflow-hidden leading-0 transform relative z-10">
+        <svg className="relative block w-full h-24 md:h-32" 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 1440 140">
+          <path 
+            fill="#D97706" 
+            fillOpacity="0.3"
+            d="M0,64L48,80C96,96,192,128,288,133.3C384,139,480,117,576,101.3C672,85,768,75,864,80C960,85,1056,107,1152,101.3C1248,96,1344,64,1392,48L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+          </path>
+        </svg>
+      </div>
       
       <Footer />
     </motion.div>
