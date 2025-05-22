@@ -137,8 +137,8 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
                   <ChartTooltip 
                     content={<ChartTooltipContent />}
                   />
-                </ChartContainer>
-              </PieChart>
+                </PieChart>
+              </ChartContainer>
             </div>
             <div className="grid grid-cols-2 gap-2">
               {biasData.map((entry, index) => (
