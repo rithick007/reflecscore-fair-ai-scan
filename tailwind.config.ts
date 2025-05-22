@@ -67,6 +67,10 @@ export default {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
+        'orbitron': ['Orbitron', 'sans-serif'],
+        'exo': ['Exo 2', 'sans-serif'],
+        'shareTech': ['Share Tech Mono', 'monospace'],
+        'majorMono': ['Major Mono Display', 'monospace'],
       },
       keyframes: {
         "accordion-down": {
@@ -97,6 +101,11 @@ export default {
           "0%": { strokeDasharray: "0 100" },
           "100%": { strokeDasharray: "var(--score) 100" },
         },
+        "glow": {
+          "0%": { boxShadow: "0 0 5px rgba(59, 130, 246, 0.5)" },
+          "50%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.8)" },
+          "100%": { boxShadow: "0 0 5px rgba(59, 130, 246, 0.5)" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -106,10 +115,12 @@ export default {
         "slide-in": "slide-in 0.4s ease-out",
         "spinner": "spinner 1.5s linear infinite",
         "score-gauge": "score-gauge 1.5s ease-out forwards",
+        "glow": "glow 2s ease-in-out infinite",
       },
       boxShadow: {
         'neumorphic': '5px 5px 10px #d1d9e6, -5px -5px 10px #ffffff',
         'neumorphic-inset': 'inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff',
+        'glow': '0 0 15px rgba(59, 130, 246, 0.7)',
       },
       backdropBlur: {
         xs: '2px',

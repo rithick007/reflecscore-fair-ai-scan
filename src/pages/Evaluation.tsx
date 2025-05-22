@@ -10,7 +10,7 @@ import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { pageTransition, fadeInUp, staggerContainer } from '@/lib/animations';
+import { pageTransition, fadeInUp, staggerContainer, glowingBorder } from '@/lib/animations';
 import { useToast } from '@/hooks/use-toast';
 
 const Evaluation: React.FC = () => {
@@ -94,7 +94,7 @@ const Evaluation: React.FC = () => {
       setShowResults(true);
       
       toast({
-        title: "Analysis Complete",
+        title: "ANALYSIS COMPLETE",
         description: "Resume has been successfully analyzed",
       });
     }, 2500);
@@ -128,7 +128,7 @@ const Evaluation: React.FC = () => {
               </svg>
             </Link>
             <Logo size="sm" />
-            <h1 className="text-lg font-semibold">ReflecScore Evaluation</h1>
+            <h1 className="text-lg font-semibold tracking-wider font-tech">REFLECSCORE EVALUATION</h1>
           </div>
         </div>
       </header>
@@ -149,7 +149,7 @@ const Evaluation: React.FC = () => {
                 variants={fadeInUp}
               >
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold">Company Requirements</h2>
+                  <h2 className="text-xl font-semibold font-tech tracking-wider">COMPANY REQUIREMENTS</h2>
                   <button
                     type="button"
                     onClick={handleClearForm}
@@ -173,37 +173,41 @@ const Evaluation: React.FC = () => {
                 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 mb-1">
-                      Job Title
+                    <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 mb-1 font-tech tracking-wide">
+                      JOB TITLE
                     </label>
-                    <Input
-                      id="jobTitle"
-                      value={jobTitle}
-                      onChange={(e) => setJobTitle(e.target.value)}
-                      className="neumorphic"
-                      placeholder="e.g. Senior Software Engineer"
-                      required
-                    />
+                    <motion.div whileHover="hover" initial="initial" variants={glowingBorder}>
+                      <Input
+                        id="jobTitle"
+                        value={jobTitle}
+                        onChange={(e) => setJobTitle(e.target.value)}
+                        className="neumorphic font-tech"
+                        placeholder="e.g. Senior Software Engineer"
+                        required
+                      />
+                    </motion.div>
                   </div>
                   
                   <div>
-                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-gray-700 mb-1">
-                      Key Skills & Requirements
+                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-gray-700 mb-1 font-tech tracking-wide">
+                      KEY SKILLS & REQUIREMENTS
                     </label>
-                    <Textarea
-                      id="jobRequirements"
-                      value={jobRequirements}
-                      onChange={(e) => setJobRequirements(e.target.value)}
-                      className="neumorphic resize-none"
-                      placeholder="e.g. 5+ years React experience, TypeScript knowledge, team leadership..."
-                      rows={5}
-                      required
-                    />
+                    <motion.div whileHover="hover" initial="initial" variants={glowingBorder}>
+                      <Textarea
+                        id="jobRequirements"
+                        value={jobRequirements}
+                        onChange={(e) => setJobRequirements(e.target.value)}
+                        className="neumorphic resize-none font-tech"
+                        placeholder="e.g. 5+ years React experience, TypeScript knowledge, team leadership..."
+                        rows={5}
+                        required
+                      />
+                    </motion.div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Job Description Upload (Optional)
+                    <label className="block text-sm font-medium text-gray-700 mb-1 font-tech tracking-wide">
+                      JOB DESCRIPTION UPLOAD (OPTIONAL)
                     </label>
                     <FileUpload
                       id="jobDescriptionUpload"
@@ -218,7 +222,7 @@ const Evaluation: React.FC = () => {
                 className="glass-card p-6"
                 variants={fadeInUp}
               >
-                <h2 className="text-xl font-semibold mb-6">Resume Upload</h2>
+                <h2 className="text-xl font-semibold mb-6 font-tech tracking-wider">RESUME UPLOAD</h2>
                 <FileUpload
                   id="resumeUpload"
                   accept=".pdf,.docx,.txt"
@@ -232,30 +236,14 @@ const Evaluation: React.FC = () => {
               >
                 <Button
                   type="submit"
-                  className="primary-gradient py-6 px-8 text-lg rounded-xl hover:opacity-90 transition-opacity"
+                  className="primary-gradient py-6 px-8 text-lg rounded-xl hover:opacity-90 transition-opacity font-tech tracking-wider"
                 >
-                  Submit & Evaluate
+                  SUBMIT & EVALUATE
                 </Button>
               </motion.div>
             </motion.form>
           ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <ResultCard score={result.score} biasFree={result.biasFree} />
-              
-              <div className="mt-8 text-center">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowResults(false)}
-                  className="hover:bg-gray-100"
-                >
-                  Back to Form
-                </Button>
-              </div>
-            </motion.div>
+            <ResultCard score={result.score} biasFree={result.biasFree} />
           )}
         </motion.div>
       </main>

@@ -84,3 +84,30 @@ export const pulseAnimation: Variants = {
     }
   }
 };
+
+export const starAnimation: Variants = {
+  initial: { 
+    opacity: 0,
+    scale: 0 
+  },
+  animate: { 
+    opacity: [0, 1, 0],
+    scale: [0, 1, 0],
+    transition: {
+      duration: 2,
+      ease: "easeInOut",
+      repeat: Infinity,
+      repeatType: "loop",
+      delay: (custom) => custom * 0.5
+    }
+  }
+};
+
+export const glowingBorder: Variants = {
+  initial: {
+    boxShadow: "0 0 0 rgba(59, 130, 246, 0)"
+  },
+  hover: {
+    boxShadow: "0 0 15px rgba(59, 130, 246, 0.6)"
+  }
+};

@@ -39,25 +39,25 @@ const Home: React.FC = () => {
             <Logo size="lg" />
             
             <motion.h2 
-              className="text-2xl md:text-3xl lg:text-4xl font-bold mt-6 mb-4"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold mt-6 mb-4 font-orbitron uppercase tracking-widest"
               variants={fadeInUp}
             >
               One Resume. One Score. Zero Bias.
             </motion.h2>
             
             <motion.p 
-              className="text-gray-600 max-w-md mb-8"
+              className="text-gray-600 max-w-md mb-8 font-exo tracking-wide"
               variants={fadeInUp}
             >
-              Harness the power of next-generation AI to analyze resumes with unprecedented fairness and clarity.
+              Harness quantum-grade neural networks to process resumes with unprecedented fairness and precision. Our advanced AI eliminates human bias through multi-layered algorithmic screening.
             </motion.p>
             
             <motion.div variants={fadeInUp}>
               <Button 
-                className="primary-gradient text-lg py-6 px-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow hover:opacity-90"
+                className="primary-gradient text-lg py-6 px-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow hover:opacity-90 font-orbitron tracking-wider"
                 onClick={handleGetStarted}
               >
-                Get Started
+                GET STARTED
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className="h-5 w-5 ml-2" 
@@ -94,8 +94,8 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Lightning Analysis</h3>
-                <p className="text-sm text-gray-600">Quantum-grade processing in milliseconds</p>
+                <h3 className="text-lg font-semibold mb-2 font-orbitron">QUANTUM ANALYSIS</h3>
+                <p className="text-sm text-gray-600 font-exo">Neural-assisted processing in milliseconds with advanced pattern recognition</p>
               </div>
               
               <div className="text-center p-4">
@@ -113,8 +113,8 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Neural Fairness</h3>
-                <p className="text-sm text-gray-600">Advanced AI bias mitigation algorithms</p>
+                <h3 className="text-lg font-semibold mb-2 font-orbitron">NEURAL FAIRNESS</h3>
+                <p className="text-sm text-gray-600 font-exo">Multi-layered AI bias mitigation with cognitive algorithmic balancing</p>
               </div>
               
               <div className="text-center p-4">
@@ -132,8 +132,8 @@ const Home: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Precision Insights</h3>
-                <p className="text-sm text-gray-600">Crystalline data visualization and metrics</p>
+                <h3 className="text-lg font-semibold mb-2 font-orbitron">DATA PRECISION</h3>
+                <p className="text-sm text-gray-600 font-exo">High-definition visualization metrics with hyper-granular qualification mapping</p>
               </div>
             </div>
           </motion.div>
