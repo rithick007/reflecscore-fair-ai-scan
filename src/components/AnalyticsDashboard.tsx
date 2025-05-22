@@ -87,6 +87,7 @@ const AnalyticsDashboard: React.FC = () => {
                 >
                   <RadialBar
                     background
+                    clockWise
                     dataKey="value"
                     cornerRadius={10}
                   />
@@ -125,7 +126,7 @@ const AnalyticsDashboard: React.FC = () => {
         
         <div className="mt-6 text-center">
           <Button 
-            className="bg-gradient-to-r from-deepViolet to-teal hover:opacity-90 transition-opacity"
+            className="bg-gradient-to-r from-[#1E1B4B] to-[#374151] hover:opacity-90 transition-opacity text-white"
           >
             View Detailed Report
           </Button>

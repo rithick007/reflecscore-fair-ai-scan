@@ -2,10 +2,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import NetworkBackground from '@/components/NetworkBackground';
 import Logo from '@/components/Logo';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import ResumeVisual from '@/components/ResumeVisual';
 import { pageTransition, staggerContainer, fadeInUp } from '@/lib/animations';
 
 const Home: React.FC = () => {
@@ -28,72 +28,84 @@ const Home: React.FC = () => {
       
       <main className="flex-1 flex items-center justify-center">
         <motion.div 
-          className="container max-w-4xl px-6 py-16"
+          className="container max-w-6xl px-6 py-16"
           variants={staggerContainer}
         >
-          <motion.div 
-            className="flex flex-col items-center text-center mb-12"
-            variants={fadeInUp}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <Logo size="lg" className="mb-8" />
-            </motion.div>
-            
-            <motion.h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 font-orbitron uppercase tracking-widest text-[#1E1B4B] drop-shadow-sm"
-              variants={fadeInUp}
-            >
-              ReflecScore
-            </motion.h2>
-            
-            <motion.p 
-              className="text-xl md:text-2xl text-[#374151] max-w-md mb-10 font-exo tracking-wide drop-shadow-sm"
-              variants={fadeInUp}
-            >
-              AI. Fairness. One Resume at a Time.
-            </motion.p>
-            
+          <div className="flex flex-col md:flex-row items-center justify-between">
             <motion.div 
+              className="flex flex-col items-start text-left mb-12 md:mb-0 md:w-1/2"
               variants={fadeInUp}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
             >
-              <Button 
-                className="bg-gradient-to-r from-deepViolet to-teal text-white text-lg py-6 px-10 rounded-xl shadow-lg hover:shadow-glow transition-all duration-300 font-orbitron tracking-wider"
-                onClick={handleGetStarted}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                START EVALUATION
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-5 w-5 ml-2" 
-                  viewBox="0 0 20 20" 
-                  fill="currentColor"
+                <Logo size="lg" className="mb-8" />
+              </motion.div>
+              
+              <motion.h2 
+                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 font-orbitron uppercase tracking-widest text-[#1E1B4B] drop-shadow-sm"
+                variants={fadeInUp}
+              >
+                ReflecScore
+              </motion.h2>
+              
+              <motion.p 
+                className="text-xl md:text-2xl text-[#374151] max-w-md mb-10 font-exo tracking-wide drop-shadow-sm"
+                variants={fadeInUp}
+              >
+                AI. Fairness. One Resume at a Time.
+              </motion.p>
+              
+              <motion.div 
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button 
+                  className="bg-gradient-to-r from-[#1E1B4B] to-[#374151] text-white text-lg py-6 px-10 rounded-xl shadow-lg hover:shadow-glow transition-all duration-300 font-orbitron tracking-wider"
+                  onClick={handleGetStarted}
                 >
-                  <path 
-                    fillRule="evenodd" 
-                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" 
-                    clipRule="evenodd" 
-                  />
-                </svg>
-              </Button>
+                  START EVALUATION
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-5 w-5 ml-2" 
+                    viewBox="0 0 20 20" 
+                    fill="currentColor"
+                  >
+                    <path 
+                      fillRule="evenodd" 
+                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" 
+                      clipRule="evenodd" 
+                    />
+                  </svg>
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+
+            {/* Resume visual with graphs on the right side */}
+            <motion.div
+              className="md:w-1/2 flex justify-center items-center"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            >
+              <ResumeVisual />
+            </motion.div>
+          </div>
           
           {/* Glass card with features using blur */}
           <motion.div 
-            className="backdrop-blur-sm bg-white/30 p-8 rounded-2xl mx-auto max-w-2xl shadow-lg border border-white/20"
+            className="backdrop-blur-sm bg-white/30 p-8 rounded-2xl mx-auto max-w-4xl shadow-lg border border-white/20 mt-12"
             variants={fadeInUp}
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4">
-                <div className="bg-deepViolet/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <div className="bg-[#1E1B4B]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-deepViolet"
+                    className="h-8 w-8 text-[#1E1B4B]"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -109,10 +121,10 @@ const Home: React.FC = () => {
               </div>
               
               <div className="text-center p-4">
-                <div className="bg-teal/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <div className="bg-[#1E1B4B]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-teal"
+                    className="h-8 w-8 text-[#1E1B4B]"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -128,10 +140,10 @@ const Home: React.FC = () => {
               </div>
               
               <div className="text-center p-4">
-                <div className="bg-electricBlue/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <div className="bg-[#1E1B4B]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-electricBlue"
+                    className="h-8 w-8 text-[#1E1B4B]"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >

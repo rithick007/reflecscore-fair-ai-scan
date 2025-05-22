@@ -98,7 +98,7 @@ export const starAnimation: Variants = {
       ease: "easeInOut",
       repeat: Infinity,
       repeatType: "loop",
-      // Fix: Change the function to a fixed number or remove the delay property
+      // Fix: Changed from function to number
       delay: 0.5
     }
   }

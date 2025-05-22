@@ -110,10 +110,13 @@ const Evaluation: React.FC = () => {
     >
       <LoadingOverlay isLoading={isProcessing} />
       
-      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+      {/* Background gradient to match home page */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B] via-[#FBBF24] to-[#F59E0B] -z-10"></div>
+      
+      <header className="border-b border-[#D97706]/30 bg-[#FBBF24]/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link to="/" className="text-[#1E1B4B] hover:text-[#1E1B4B]/80 transition-colors">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -128,12 +131,12 @@ const Evaluation: React.FC = () => {
               </svg>
             </Link>
             <Logo size="sm" />
-            <h1 className="text-lg font-semibold tracking-wider font-tech">REFLECSCORE EVALUATION</h1>
+            <h1 className="text-lg font-semibold tracking-wider font-tech text-[#1E1B4B]">REFLECSCORE EVALUATION</h1>
           </div>
         </div>
       </header>
       
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 py-8 relative z-10">
         <motion.div
           className="max-w-3xl mx-auto"
           variants={staggerContainer}
@@ -145,15 +148,15 @@ const Evaluation: React.FC = () => {
               variants={fadeInUp}
             >
               <motion.div 
-                className="glass-card p-6"
+                className="backdrop-blur-sm bg-white/30 p-6 rounded-2xl border border-white/20 shadow-lg"
                 variants={fadeInUp}
               >
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold font-tech tracking-wider">COMPANY REQUIREMENTS</h2>
+                  <h2 className="text-xl font-semibold font-tech tracking-wider text-[#1E1B4B]">COMPANY REQUIREMENTS</h2>
                   <button
                     type="button"
                     onClick={handleClearForm}
-                    className="text-gray-500 hover:text-gray-700 transition-colors"
+                    className="text-[#1E1B4B]/70 hover:text-[#1E1B4B] transition-colors"
                     aria-label="Clear form"
                   >
                     <svg
@@ -173,7 +176,7 @@ const Evaluation: React.FC = () => {
                 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 mb-1 font-tech tracking-wide">
+                    <label htmlFor="jobTitle" className="block text-sm font-medium text-[#1E1B4B] mb-1 font-tech tracking-wide">
                       JOB TITLE
                     </label>
                     <motion.div whileHover="hover" initial="initial" variants={glowingBorder}>
@@ -189,7 +192,7 @@ const Evaluation: React.FC = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-gray-700 mb-1 font-tech tracking-wide">
+                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-[#1E1B4B] mb-1 font-tech tracking-wide">
                       KEY SKILLS & REQUIREMENTS
                     </label>
                     <motion.div whileHover="hover" initial="initial" variants={glowingBorder}>
@@ -206,7 +209,7 @@ const Evaluation: React.FC = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 font-tech tracking-wide">
+                    <label className="block text-sm font-medium text-[#1E1B4B] mb-1 font-tech tracking-wide">
                       JOB DESCRIPTION UPLOAD (OPTIONAL)
                     </label>
                     <FileUpload
@@ -219,10 +222,10 @@ const Evaluation: React.FC = () => {
               </motion.div>
               
               <motion.div 
-                className="glass-card p-6"
+                className="backdrop-blur-sm bg-white/30 p-6 rounded-2xl border border-white/20 shadow-lg"
                 variants={fadeInUp}
               >
-                <h2 className="text-xl font-semibold mb-6 font-tech tracking-wider">RESUME UPLOAD</h2>
+                <h2 className="text-xl font-semibold mb-6 font-tech tracking-wider text-[#1E1B4B]">RESUME UPLOAD</h2>
                 <FileUpload
                   id="resumeUpload"
                   accept=".pdf,.docx,.txt"
@@ -236,7 +239,7 @@ const Evaluation: React.FC = () => {
               >
                 <Button
                   type="submit"
-                  className="primary-gradient py-6 px-8 text-lg rounded-xl hover:opacity-90 transition-opacity font-tech tracking-wider"
+                  className="bg-gradient-to-r from-[#1E1B4B] to-[#374151] text-white py-6 px-8 text-lg rounded-xl hover:opacity-90 transition-opacity font-tech tracking-wider"
                 >
                   SUBMIT & EVALUATE
                 </Button>
