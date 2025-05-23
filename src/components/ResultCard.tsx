@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import FairnessToggle from '@/components/FairnessToggle';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
+import ExplainabilitySection from '@/components/ExplainabilitySection';
+import EmailAutomationSection from '@/components/EmailAutomationSection';
 
 interface ResultCardProps {
   score: number;
@@ -189,6 +191,11 @@ const ResultCard: React.FC<ResultCardProps> = ({
         </Button>
       </motion.div>
       
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <ExplainabilitySection />
+        <EmailAutomationSection />
+      </div>
+
       <AnalyticsDashboard />
     </motion.div>
   );
