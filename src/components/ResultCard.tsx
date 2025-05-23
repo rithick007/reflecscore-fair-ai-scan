@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -211,13 +210,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
         <AIInsights />
       </div>
       
-      <AnalyticsDashboard
-        skillsMatch={randomSubScores.skillsMatch}
-        experience={randomSubScores.experience}
-        education={randomSubScores.education}
-        keywords={randomSubScores.keywords}
-        hasBias={!biasFree}
-      />
+      <AnalyticsDashboard />
     </motion.div>
   );
 };

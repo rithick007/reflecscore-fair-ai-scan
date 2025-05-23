@@ -87,7 +87,6 @@ const AnalyticsDashboard: React.FC = () => {
                 >
                   <RadialBar
                     background
-                    clockWise
                     dataKey="value"
                     cornerRadius={10}
                   />
