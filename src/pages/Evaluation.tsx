@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -10,7 +9,7 @@ import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { pageTransition, fadeInUp, staggerContainer, glowingBorder } from '@/lib/animations';
+import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useToast } from '@/hooks/use-toast';
 
 const Evaluation: React.FC = () => {
@@ -101,22 +100,16 @@ const Evaluation: React.FC = () => {
   };
   
   return (
-    <motion.div
-      className="min-h-screen flex flex-col"
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={pageTransition}
-    >
+    <div className="min-h-screen flex flex-col bg-slate-50">
       <LoadingOverlay isLoading={isProcessing} />
       
-      {/* Professional gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1E1B4B] via-[#313866] to-[#4B5563] -z-10"></div>
+      {/* Professional solid color background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900 -z-10"></div>
       
-      <header className="border-b border-[#4B5563]/30 bg-[#1E1B4B]/90 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-slate-700 bg-slate-800 sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="text-white hover:text-white/80 transition-colors">
+            <Link to="/" className="text-white hover:opacity-80 transition-colors">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -131,7 +124,7 @@ const Evaluation: React.FC = () => {
               </svg>
             </Link>
             <Logo size="sm" className="text-white" />
-            <h1 className="text-lg font-semibold tracking-wider font-tech text-white">REFLECSCORE EVALUATION</h1>
+            <h1 className="text-lg font-semibold tracking-wider text-white">EVALUATION</h1>
           </div>
         </div>
       </header>
@@ -140,23 +133,22 @@ const Evaluation: React.FC = () => {
         <motion.div
           className="max-w-3xl mx-auto"
           variants={staggerContainer}
+          initial="initial"
+          animate="animate"
         >
           {!showResults ? (
             <motion.form
               onSubmit={handleSubmit}
-              className="space-y-8"
+              className="space-y-6"
               variants={fadeInUp}
             >
-              <motion.div 
-                className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg"
-                variants={fadeInUp}
-              >
+              <div className="bg-white rounded-lg shadow-md p-6 border border-slate-200">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold font-tech tracking-wider text-white">COMPANY REQUIREMENTS</h2>
+                  <h2 className="text-xl font-semibold text-slate-800">Company Requirements</h2>
                   <button
                     type="button"
                     onClick={handleClearForm}
-                    className="text-white/70 hover:text-white transition-colors"
+                    className="text-slate-500 hover:text-slate-700 transition-colors"
                     aria-label="Clear form"
                   >
                     <svg
@@ -176,41 +168,37 @@ const Evaluation: React.FC = () => {
                 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="jobTitle" className="block text-sm font-medium text-white mb-1 font-tech tracking-wide">
-                      JOB TITLE
+                    <label htmlFor="jobTitle" className="block text-sm font-medium text-slate-700 mb-1">
+                      Job Title
                     </label>
-                    <motion.div whileHover="hover" initial="initial" variants={glowingBorder}>
-                      <Input
-                        id="jobTitle"
-                        value={jobTitle}
-                        onChange={(e) => setJobTitle(e.target.value)}
-                        className="bg-white/20 border-white/30 text-white placeholder:text-white/50"
-                        placeholder="e.g. Senior Software Engineer"
-                        required
-                      />
-                    </motion.div>
+                    <Input
+                      id="jobTitle"
+                      value={jobTitle}
+                      onChange={(e) => setJobTitle(e.target.value)}
+                      className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-400"
+                      placeholder="e.g. Senior Software Engineer"
+                      required
+                    />
                   </div>
                   
                   <div>
-                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-white mb-1 font-tech tracking-wide">
-                      KEY SKILLS & REQUIREMENTS
+                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-slate-700 mb-1">
+                      Key Skills & Requirements
                     </label>
-                    <motion.div whileHover="hover" initial="initial" variants={glowingBorder}>
-                      <Textarea
-                        id="jobRequirements"
-                        value={jobRequirements}
-                        onChange={(e) => setJobRequirements(e.target.value)}
-                        className="bg-white/20 border-white/30 text-white placeholder:text-white/50 resize-none"
-                        placeholder="e.g. 5+ years React experience, TypeScript knowledge, team leadership..."
-                        rows={5}
-                        required
-                      />
-                    </motion.div>
+                    <Textarea
+                      id="jobRequirements"
+                      value={jobRequirements}
+                      onChange={(e) => setJobRequirements(e.target.value)}
+                      className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 resize-none"
+                      placeholder="e.g. 5+ years React experience, TypeScript knowledge, team leadership..."
+                      rows={5}
+                      required
+                    />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-white mb-1 font-tech tracking-wide">
-                      JOB DESCRIPTION UPLOAD (OPTIONAL)
+                    <label className="block text-sm font-medium text-slate-700 mb-1">
+                      Job Description Upload (Optional)
                     </label>
                     <FileUpload
                       id="jobDescriptionUpload"
@@ -219,31 +207,25 @@ const Evaluation: React.FC = () => {
                     />
                   </div>
                 </div>
-              </motion.div>
+              </div>
               
-              <motion.div 
-                className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg"
-                variants={fadeInUp}
-              >
-                <h2 className="text-xl font-semibold mb-6 font-tech tracking-wider text-white">RESUME UPLOAD</h2>
+              <div className="bg-white rounded-lg shadow-md p-6 border border-slate-200">
+                <h2 className="text-xl font-semibold mb-6 text-slate-800">Resume Upload</h2>
                 <FileUpload
                   id="resumeUpload"
                   accept=".pdf,.docx,.txt"
                   onFileChange={setResumeFile}
                 />
-              </motion.div>
+              </div>
               
-              <motion.div 
-                className="flex justify-center"
-                variants={fadeInUp}
-              >
+              <div className="flex justify-center">
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] text-white py-6 px-8 text-lg rounded-xl hover:opacity-90 transition-opacity font-tech tracking-wider shadow-lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 text-base rounded-md transition-colors shadow-sm"
                 >
-                  SUBMIT & EVALUATE
+                  Submit & Evaluate
                 </Button>
-              </motion.div>
+              </div>
             </motion.form>
           ) : (
             <ResultCard score={result.score} biasFree={result.biasFree} />
@@ -252,7 +234,7 @@ const Evaluation: React.FC = () => {
       </main>
       
       <Footer />
-    </motion.div>
+    </div>
   );
 };
 

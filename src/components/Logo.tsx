@@ -16,7 +16,7 @@ const Logo = ({ className, size = 'md' }: LogoProps) => {
 
   return (
     <div className={cn('flex items-center', className)}>
-      <div className="bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] rounded-lg p-2 mr-2 shadow-md">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-lg p-2 mr-2 shadow-sm">
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 24 24" 
@@ -35,7 +35,7 @@ const Logo = ({ className, size = 'md' }: LogoProps) => {
         </svg>
       </div>
       <h1 className={cn('font-poppins font-bold', sizeClasses[size])}>
-        Reflec<span className="text-[#06B6D4]">Score</span>
+        Reflec<span className="text-blue-500">Score</span>
       </h1>
     </div>
   );

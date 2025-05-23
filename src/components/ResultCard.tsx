@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import FairnessToggle from '@/components/FairnessToggle';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
-import StarryBackground from '@/components/StarryBackground';
 
 interface ResultCardProps {
   score: number;
@@ -48,7 +47,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
   
   const getScoreColor = () => {
     if (score >= 80) return 'text-green-500';
-    if (score >= 60) return 'text-teal';
+    if (score >= 60) return 'text-blue-500';
     if (score >= 40) return 'text-yellow-500';
     return 'text-red-500';
   };
@@ -56,7 +55,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
   const getBiasStatusStyles = () => {
     return biasFree
       ? 'bg-green-50 text-green-600 border-green-200'
-      : 'bg-deepViolet/10 text-deepViolet border-deepViolet/20';
+      : 'bg-blue-50 text-blue-600 border-blue-200';
   };
   
   const getBiasStatusIcon = () => {
@@ -76,7 +75,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
     ) : (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5 text-deepViolet mr-2"
+        className="h-5 w-5 text-blue-500 mr-2"
         viewBox="0 0 20 20"
         fill="currentColor"
       >
@@ -102,17 +101,15 @@ const ResultCard: React.FC<ResultCardProps> = ({
       transition={{ duration: 0.5 }}
       className="w-full"
     >
-      <StarryBackground />
-      
       <FairnessToggle />
       
       <motion.div
-        className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg w-full max-w-md mx-auto hover-lift"
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
+        className="bg-white rounded-lg shadow-md p-6 border border-slate-200 w-full max-w-md mx-auto mb-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <h3 className="text-xl font-semibold mb-6 text-center font-tech text-white">RESULTS</h3>
+        <h3 className="text-xl font-semibold mb-6 text-center text-slate-800">RESULTS</h3>
         
         <div className="flex flex-col items-center mb-8">
           <div className="relative w-40 h-40 mb-4">
@@ -126,7 +123,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
                 cy="50"
                 r="40"
                 fill="transparent"
-                stroke="#4B5563"
+                stroke="#E2E8F0"
                 strokeWidth="8"
               />
               {/* Score circle */}
@@ -146,34 +143,34 @@ const ResultCard: React.FC<ResultCardProps> = ({
               />
               <defs>
                 <linearGradient id="gradient" gradientTransform="rotate(90)">
-                  <stop offset="0%" stopColor="#8B5CF6" />
-                  <stop offset="100%" stopColor="#06B6D4" />
+                  <stop offset="0%" stopColor="#3B82F6" />
+                  <stop offset="100%" stopColor="#2563EB" />
                 </linearGradient>
               </defs>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center flex-col">
-              <span className={cn("text-4xl font-bold font-tech", getScoreColor())}>
+              <span className={cn("text-4xl font-bold", getScoreColor())}>
                 {animatedScore}
               </span>
-              <span className="text-sm text-white/70 font-tech">OUT OF 100</span>
+              <span className="text-sm text-slate-500">OUT OF 100</span>
             </div>
           </div>
           
-          <h4 className="text-lg font-medium mb-2 font-tech text-white">FIT SCORE</h4>
-          <p className="text-sm text-white/80 text-center mb-6 font-tech tracking-wide">
+          <h4 className="text-lg font-medium mb-2 text-slate-800">FIT SCORE</h4>
+          <p className="text-sm text-slate-500 text-center mb-6">
             THIS RESUME FITS {score}% OF THE JOB REQUIREMENTS
           </p>
           
-          <div className={cn("flex items-center px-4 py-2 rounded-full border", getBiasStatusStyles())}>
+          <div className={cn("flex items-center px-4 py-2 rounded-md border", getBiasStatusStyles())}>
             {getBiasStatusIcon()}
-            <span className="text-sm font-medium font-tech">
+            <span className="text-sm font-medium">
               {biasFree ? "NO BIAS DETECTED" : "BIAS MITIGATED"}
             </span>
           </div>
         </div>
         
         <Button 
-          className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] text-white hover:opacity-90 transition-opacity shadow-md" 
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-colors" 
           onClick={handleDownloadPDF}
         >
           <svg
@@ -191,8 +188,6 @@ const ResultCard: React.FC<ResultCardProps> = ({
           DOWNLOAD PDF REPORT
         </Button>
       </motion.div>
-      
-      {/* Removed AIInsights component */}
       
       <AnalyticsDashboard />
     </motion.div>
