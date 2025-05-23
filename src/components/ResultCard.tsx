@@ -1,9 +1,9 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import FairnessToggle from '@/components/FairnessToggle';
-import AIInsights from '@/components/AIInsights';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import StarryBackground from '@/components/StarryBackground';
 
@@ -95,20 +95,6 @@ const ResultCard: React.FC<ResultCardProps> = ({
     alert('PDF Report would be generated here');
   };
   
-  // Generate some random sub-scores for the chart
-  const randomSubScores = {
-    skillsMatch: Math.floor(Math.random() * 30) + score - 15, // within ±15 of main score
-    experience: Math.floor(Math.random() * 30) + score - 15,
-    education: Math.floor(Math.random() * 30) + score - 15,
-    keywords: Math.floor(Math.random() * 30) + score - 15
-  };
-
-  // Ensure scores are within 0-100 range
-  for (const key in randomSubScores) {
-    const typedKey = key as keyof typeof randomSubScores;
-    randomSubScores[typedKey] = Math.min(100, Math.max(0, randomSubScores[typedKey]));
-  }
-  
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -121,12 +107,12 @@ const ResultCard: React.FC<ResultCardProps> = ({
       <FairnessToggle />
       
       <motion.div
-        className="glass-card p-6 w-full max-w-md mx-auto hover-lift"
+        className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg w-full max-w-md mx-auto hover-lift"
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <h3 className="text-xl font-semibold mb-6 text-center font-tech">RESULTS</h3>
+        <h3 className="text-xl font-semibold mb-6 text-center font-tech text-white">RESULTS</h3>
         
         <div className="flex flex-col items-center mb-8">
           <div className="relative w-40 h-40 mb-4">
@@ -140,7 +126,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
                 cy="50"
                 r="40"
                 fill="transparent"
-                stroke="#e5e7eb"
+                stroke="#4B5563"
                 strokeWidth="8"
               />
               {/* Score circle */}
@@ -160,7 +146,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
               />
               <defs>
                 <linearGradient id="gradient" gradientTransform="rotate(90)">
-                  <stop offset="0%" stopColor="#3B82F6" />
+                  <stop offset="0%" stopColor="#8B5CF6" />
                   <stop offset="100%" stopColor="#06B6D4" />
                 </linearGradient>
               </defs>
@@ -169,12 +155,12 @@ const ResultCard: React.FC<ResultCardProps> = ({
               <span className={cn("text-4xl font-bold font-tech", getScoreColor())}>
                 {animatedScore}
               </span>
-              <span className="text-sm text-gray-500 font-tech">OUT OF 100</span>
+              <span className="text-sm text-white/70 font-tech">OUT OF 100</span>
             </div>
           </div>
           
-          <h4 className="text-lg font-medium mb-2 font-tech">FIT SCORE</h4>
-          <p className="text-sm text-gray-600 text-center mb-6 font-tech tracking-wide">
+          <h4 className="text-lg font-medium mb-2 font-tech text-white">FIT SCORE</h4>
+          <p className="text-sm text-white/80 text-center mb-6 font-tech tracking-wide">
             THIS RESUME FITS {score}% OF THE JOB REQUIREMENTS
           </p>
           
@@ -187,7 +173,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
         </div>
         
         <Button 
-          className="w-full primary-gradient hover:opacity-90 transition-opacity" 
+          className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] text-white hover:opacity-90 transition-opacity shadow-md" 
           onClick={handleDownloadPDF}
         >
           <svg
@@ -206,9 +192,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
         </Button>
       </motion.div>
       
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-        <AIInsights />
-      </div>
+      {/* Removed AIInsights component */}
       
       <AnalyticsDashboard />
     </motion.div>

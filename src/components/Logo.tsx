@@ -16,7 +16,7 @@ const Logo = ({ className, size = 'md' }: LogoProps) => {
 
   return (
     <div className={cn('flex items-center', className)}>
-      <div className="bg-gradient-to-r from-[#1E1B4B] to-[#374151] rounded-lg p-2 mr-2">
+      <div className="bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] rounded-lg p-2 mr-2 shadow-md">
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 24 24" 
@@ -25,7 +25,7 @@ const Logo = ({ className, size = 'md' }: LogoProps) => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={cn('text-[#FBBF24]', {
+          className={cn('text-white', {
             'w-4 h-4': size === 'sm',
             'w-6 h-6': size === 'md',
             'w-8 h-8': size === 'lg',
@@ -35,7 +35,7 @@ const Logo = ({ className, size = 'md' }: LogoProps) => {
         </svg>
       </div>
       <h1 className={cn('font-poppins font-bold', sizeClasses[size])}>
-        Reflec<span className="text-[#FBBF24]">Score</span>
+        Reflec<span className="text-[#06B6D4]">Score</span>
       </h1>
     </div>
   );

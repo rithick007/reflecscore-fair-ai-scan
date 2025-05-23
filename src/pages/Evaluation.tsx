@@ -110,13 +110,13 @@ const Evaluation: React.FC = () => {
     >
       <LoadingOverlay isLoading={isProcessing} />
       
-      {/* Background gradient to match home page */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B] via-[#FBBF24] to-[#F59E0B] -z-10"></div>
+      {/* Professional gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1E1B4B] via-[#313866] to-[#4B5563] -z-10"></div>
       
-      <header className="border-b border-[#D97706]/30 bg-[#FBBF24]/80 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-[#4B5563]/30 bg-[#1E1B4B]/90 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="text-[#1E1B4B] hover:text-[#1E1B4B]/80 transition-colors">
+            <Link to="/" className="text-white hover:text-white/80 transition-colors">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -130,8 +130,8 @@ const Evaluation: React.FC = () => {
                 />
               </svg>
             </Link>
-            <Logo size="sm" />
-            <h1 className="text-lg font-semibold tracking-wider font-tech text-[#1E1B4B]">REFLECSCORE EVALUATION</h1>
+            <Logo size="sm" className="text-white" />
+            <h1 className="text-lg font-semibold tracking-wider font-tech text-white">REFLECSCORE EVALUATION</h1>
           </div>
         </div>
       </header>
@@ -148,15 +148,15 @@ const Evaluation: React.FC = () => {
               variants={fadeInUp}
             >
               <motion.div 
-                className="backdrop-blur-sm bg-white/30 p-6 rounded-2xl border border-white/20 shadow-lg"
+                className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg"
                 variants={fadeInUp}
               >
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold font-tech tracking-wider text-[#1E1B4B]">COMPANY REQUIREMENTS</h2>
+                  <h2 className="text-xl font-semibold font-tech tracking-wider text-white">COMPANY REQUIREMENTS</h2>
                   <button
                     type="button"
                     onClick={handleClearForm}
-                    className="text-[#1E1B4B]/70 hover:text-[#1E1B4B] transition-colors"
+                    className="text-white/70 hover:text-white transition-colors"
                     aria-label="Clear form"
                   >
                     <svg
@@ -176,7 +176,7 @@ const Evaluation: React.FC = () => {
                 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="jobTitle" className="block text-sm font-medium text-[#1E1B4B] mb-1 font-tech tracking-wide">
+                    <label htmlFor="jobTitle" className="block text-sm font-medium text-white mb-1 font-tech tracking-wide">
                       JOB TITLE
                     </label>
                     <motion.div whileHover="hover" initial="initial" variants={glowingBorder}>
@@ -184,7 +184,7 @@ const Evaluation: React.FC = () => {
                         id="jobTitle"
                         value={jobTitle}
                         onChange={(e) => setJobTitle(e.target.value)}
-                        className="neumorphic font-tech"
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/50"
                         placeholder="e.g. Senior Software Engineer"
                         required
                       />
@@ -192,7 +192,7 @@ const Evaluation: React.FC = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-[#1E1B4B] mb-1 font-tech tracking-wide">
+                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-white mb-1 font-tech tracking-wide">
                       KEY SKILLS & REQUIREMENTS
                     </label>
                     <motion.div whileHover="hover" initial="initial" variants={glowingBorder}>
@@ -200,7 +200,7 @@ const Evaluation: React.FC = () => {
                         id="jobRequirements"
                         value={jobRequirements}
                         onChange={(e) => setJobRequirements(e.target.value)}
-                        className="neumorphic resize-none font-tech"
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/50 resize-none"
                         placeholder="e.g. 5+ years React experience, TypeScript knowledge, team leadership..."
                         rows={5}
                         required
@@ -209,7 +209,7 @@ const Evaluation: React.FC = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-[#1E1B4B] mb-1 font-tech tracking-wide">
+                    <label className="block text-sm font-medium text-white mb-1 font-tech tracking-wide">
                       JOB DESCRIPTION UPLOAD (OPTIONAL)
                     </label>
                     <FileUpload
@@ -222,10 +222,10 @@ const Evaluation: React.FC = () => {
               </motion.div>
               
               <motion.div 
-                className="backdrop-blur-sm bg-white/30 p-6 rounded-2xl border border-white/20 shadow-lg"
+                className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg"
                 variants={fadeInUp}
               >
-                <h2 className="text-xl font-semibold mb-6 font-tech tracking-wider text-[#1E1B4B]">RESUME UPLOAD</h2>
+                <h2 className="text-xl font-semibold mb-6 font-tech tracking-wider text-white">RESUME UPLOAD</h2>
                 <FileUpload
                   id="resumeUpload"
                   accept=".pdf,.docx,.txt"
@@ -239,7 +239,7 @@ const Evaluation: React.FC = () => {
               >
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-[#1E1B4B] to-[#374151] text-white py-6 px-8 text-lg rounded-xl hover:opacity-90 transition-opacity font-tech tracking-wider"
+                  className="bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] text-white py-6 px-8 text-lg rounded-xl hover:opacity-90 transition-opacity font-tech tracking-wider shadow-lg"
                 >
                   SUBMIT & EVALUATE
                 </Button>
