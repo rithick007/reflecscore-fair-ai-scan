@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -14,9 +15,9 @@ import { useToast } from '@/hooks/use-toast';
 
 const Evaluation: React.FC = () => {
   // Form state
-  const [jobTitle, setJobTitle] = useState('');
-  const [jobRequirements, setJobRequirements] = useState('');
-  const [jobDescriptionFile, setJobDescriptionFile] = useState<File | null>(null);
+  const [companyName, setCompanyName] = useState('');
+  const [jobDescription, setJobDescription] = useState('');
+  const [candidateEmail, setCandidateEmail] = useState('');
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   
   // Processing state
@@ -24,25 +25,34 @@ const Evaluation: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   
   // Mock result (in a real app, this would come from an API)
-  const [result, setResult] = useState({ score: 78, biasFree: true });
+  const [result, setResult] = useState({ score: 0, biasFree: true });
   
   const { toast } = useToast();
   
   const validateForm = (): boolean => {
-    if (!jobTitle.trim()) {
+    if (!companyName.trim()) {
       toast({
         title: "Error",
-        description: "Job title is required",
+        description: "Company name is required",
         variant: "destructive"
       });
       return false;
     }
     
-    if (!jobRequirements.trim()) {
+    if (!jobDescription.trim()) {
       toast({
         title: "Error",
-        description: "Key skills & requirements are required",
+        description: "Job description is required",
         variant: "destructive" 
+      });
+      return false;
+    }
+    
+    if (!validateEmail(candidateEmail)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid candidate email",
+        variant: "destructive"
       });
       return false;
     }
@@ -59,10 +69,15 @@ const Evaluation: React.FC = () => {
     return true;
   };
   
+  const validateEmail = (email: string): boolean => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+  
   const handleClearForm = () => {
-    setJobTitle('');
-    setJobRequirements('');
-    setJobDescriptionFile(null);
+    setCompanyName('');
+    setJobDescription('');
+    setCandidateEmail('');
     setResumeFile(null);
     setShowResults(false);
   };
@@ -80,7 +95,6 @@ const Evaluation: React.FC = () => {
     // Simulate API call with timeout
     setTimeout(() => {
       // In a real app, this would be an actual API call to analyze the resume
-      // For now, we'll just show a mock result
       const randomScore = Math.floor(Math.random() * 40) + 60; // Random score between 60-99
       const randomBias = Math.random() > 0.7; // 30% chance of bias detection
       
@@ -100,13 +114,13 @@ const Evaluation: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
+    <div className="min-h-screen flex flex-col bg-amber-50">
       <LoadingOverlay isLoading={isProcessing} />
       
       {/* Professional solid color background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900 -z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-amber-800 to-amber-900 -z-10"></div>
       
-      <header className="border-b border-slate-700 bg-slate-800 sticky top-0 z-10">
+      <header className="border-b border-amber-700 bg-amber-800 sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/" className="text-white hover:opacity-80 transition-colors">
@@ -124,7 +138,7 @@ const Evaluation: React.FC = () => {
               </svg>
             </Link>
             <Logo size="sm" className="text-white" />
-            <h1 className="text-lg font-semibold tracking-wider text-white">EVALUATION</h1>
+            <h1 className="text-lg font-semibold tracking-wider text-white font-orbitron">EVALUATION</h1>
           </div>
         </div>
       </header>
@@ -144,7 +158,7 @@ const Evaluation: React.FC = () => {
             >
               <div className="bg-white rounded-lg shadow-md p-6 border border-slate-200">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold text-slate-800">Company Requirements</h2>
+                  <h2 className="text-xl font-semibold text-slate-800 font-orbitron">Candidate Evaluation</h2>
                   <button
                     type="button"
                     onClick={handleClearForm}
@@ -168,49 +182,53 @@ const Evaluation: React.FC = () => {
                 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="jobTitle" className="block text-sm font-medium text-slate-700 mb-1">
-                      Job Title
+                    <label htmlFor="companyName" className="block text-sm font-medium text-slate-700 mb-1">
+                      Company Name
                     </label>
                     <Input
-                      id="jobTitle"
-                      value={jobTitle}
-                      onChange={(e) => setJobTitle(e.target.value)}
+                      id="companyName"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
                       className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-400"
-                      placeholder="e.g. Senior Software Engineer"
+                      placeholder="e.g. Quantum Technologies Inc."
                       required
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="jobRequirements" className="block text-sm font-medium text-slate-700 mb-1">
-                      Key Skills & Requirements
+                    <label htmlFor="jobDescription" className="block text-sm font-medium text-slate-700 mb-1">
+                      Job Description
                     </label>
                     <Textarea
-                      id="jobRequirements"
-                      value={jobRequirements}
-                      onChange={(e) => setJobRequirements(e.target.value)}
+                      id="jobDescription"
+                      value={jobDescription}
+                      onChange={(e) => setJobDescription(e.target.value)}
                       className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 resize-none"
-                      placeholder="e.g. 5+ years React experience, TypeScript knowledge, team leadership..."
+                      placeholder="Enter the job description with key requirements..."
                       rows={5}
                       required
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">
-                      Job Description Upload (Optional)
+                    <label htmlFor="candidateEmail" className="block text-sm font-medium text-slate-700 mb-1">
+                      Candidate Email
                     </label>
-                    <FileUpload
-                      id="jobDescriptionUpload"
-                      accept=".pdf,.docx,.txt"
-                      onFileChange={setJobDescriptionFile}
+                    <Input
+                      id="candidateEmail"
+                      value={candidateEmail}
+                      onChange={(e) => setCandidateEmail(e.target.value)}
+                      className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-400"
+                      placeholder="candidate@example.com"
+                      type="email"
+                      required
                     />
                   </div>
                 </div>
               </div>
               
               <div className="bg-white rounded-lg shadow-md p-6 border border-slate-200">
-                <h2 className="text-xl font-semibold mb-6 text-slate-800">Resume Upload</h2>
+                <h2 className="text-xl font-semibold mb-6 text-slate-800 font-orbitron">Resume Upload</h2>
                 <FileUpload
                   id="resumeUpload"
                   accept=".pdf,.docx,.txt"
@@ -228,7 +246,7 @@ const Evaluation: React.FC = () => {
               </div>
             </motion.form>
           ) : (
-            <ResultCard score={result.score} biasFree={result.biasFree} />
+            <ResultCard score={result.score} biasFree={result.biasFree} email={candidateEmail} />
           )}
         </motion.div>
       </main>

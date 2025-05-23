@@ -4,18 +4,19 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import FairnessToggle from '@/components/FairnessToggle';
-import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import ExplainabilitySection from '@/components/ExplainabilitySection';
 import EmailAutomationSection from '@/components/EmailAutomationSection';
 
 interface ResultCardProps {
   score: number;
   biasFree: boolean;
+  email: string;
 }
 
 const ResultCard: React.FC<ResultCardProps> = ({ 
   score, 
-  biasFree 
+  biasFree,
+  email
 }) => {
   const [animatedScore, setAnimatedScore] = useState(0);
   const circleRef = useRef<SVGCircleElement>(null);
@@ -49,7 +50,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
   
   const getScoreColor = () => {
     if (score >= 80) return 'text-green-500';
-    if (score >= 60) return 'text-blue-500';
+    if (score >= 70) return 'text-blue-500';
     if (score >= 40) return 'text-yellow-500';
     return 'text-red-500';
   };
@@ -58,42 +59,6 @@ const ResultCard: React.FC<ResultCardProps> = ({
     return biasFree
       ? 'bg-green-50 text-green-600 border-green-200'
       : 'bg-blue-50 text-blue-600 border-blue-200';
-  };
-  
-  const getBiasStatusIcon = () => {
-    return biasFree ? (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5 text-green-500 mr-2"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ) : (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5 text-blue-500 mr-2"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-          clipRule="evenodd"
-        />
-      </svg>
-    );
-  };
-  
-  const handleDownloadPDF = () => {
-    // PDF generation logic would go here
-    // For now, let's just show an alert
-    alert('PDF Report would be generated here');
   };
   
   return (
@@ -111,7 +76,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <h3 className="text-xl font-semibold mb-6 text-center text-slate-800">RESULTS</h3>
+        <h3 className="text-xl font-semibold mb-6 text-center text-slate-800 font-orbitron">RESULTS</h3>
         
         <div className="flex flex-col items-center mb-8">
           <div className="relative w-40 h-40 mb-4">
@@ -142,6 +107,9 @@ const ResultCard: React.FC<ResultCardProps> = ({
                 strokeDashoffset="62.8" // 0.25 * circumference (to start from top)
                 className="animate-score-gauge"
                 transform="rotate(-90, 50, 50)"
+                style={{
+                  filter: score >= 70 ? 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.5))' : 'none'
+                }}
               />
               <defs>
                 <linearGradient id="gradient" gradientTransform="rotate(90)">
@@ -151,20 +119,51 @@ const ResultCard: React.FC<ResultCardProps> = ({
               </defs>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center flex-col">
-              <span className={cn("text-4xl font-bold", getScoreColor())}>
+              <span 
+                className={cn("text-4xl font-bold", getScoreColor())}
+                style={{
+                  textShadow: score >= 70 ? '0 0 15px rgba(59, 130, 246, 0.6)' : 'none'
+                }}
+              >
                 {animatedScore}
               </span>
               <span className="text-sm text-slate-500">OUT OF 100</span>
             </div>
           </div>
           
-          <h4 className="text-lg font-medium mb-2 text-slate-800">FIT SCORE</h4>
+          <h4 className="text-lg font-medium mb-2 text-slate-800 font-orbitron">FIT SCORE</h4>
           <p className="text-sm text-slate-500 text-center mb-6">
             THIS RESUME FITS {score}% OF THE JOB REQUIREMENTS
           </p>
           
           <div className={cn("flex items-center px-4 py-2 rounded-md border", getBiasStatusStyles())}>
-            {getBiasStatusIcon()}
+            {biasFree ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-green-500 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-blue-500 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            )}
             <span className="text-sm font-medium">
               {biasFree ? "NO BIAS DETECTED" : "BIAS MITIGATED"}
             </span>
@@ -173,7 +172,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
         
         <Button 
           className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-colors" 
-          onClick={handleDownloadPDF}
+          onClick={() => window.print()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -193,10 +192,8 @@ const ResultCard: React.FC<ResultCardProps> = ({
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <ExplainabilitySection />
-        <EmailAutomationSection />
+        <EmailAutomationSection score={score} email={email} />
       </div>
-
-      <AnalyticsDashboard />
     </motion.div>
   );
 };
