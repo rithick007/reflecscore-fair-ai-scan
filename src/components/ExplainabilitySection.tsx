@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Button } from '@/components/ui/button';
-import { InfoCircle } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { 
   Popover,
   PopoverContent,
@@ -46,7 +46,7 @@ const ExplainabilitySection: React.FC = () => {
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                <InfoCircle className="h-4 w-4" />
+                <Info className="h-4 w-4" />
                 <span className="sr-only">Info</span>
               </Button>
             </PopoverTrigger>

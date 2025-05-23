@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { PaperPlane, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { Send, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const EmailAutomationSection: React.FC = () => {
@@ -88,7 +88,7 @@ const EmailAutomationSection: React.FC = () => {
           disabled={isSending}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white mt-4"
         >
-          <PaperPlane className="h-4 w-4 mr-2" />
+          <Send className="h-4 w-4 mr-2" />
           Send Custom Feedback
         </Button>
       </CardContent>
